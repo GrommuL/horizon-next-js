@@ -59,11 +59,11 @@ export const LoginForm = () => {
 									<FormLabel className='text-xs font-bold uppercase text-zinc-500 dark:text-zinc-200'>Почта</FormLabel>
 									<FormControl>
 										<Input
-											{...field}
 											placeholder='example@mail.com'
 											type='email'
 											disabled={isPending}
 											className='border-0 bg-zinc-300/25 text-black focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white dark:placeholder:text-white/55'
+											{...field}
 										/>
 									</FormControl>
 									<FormMessage className='text-xs dark:text-rose-500' />
@@ -78,11 +78,11 @@ export const LoginForm = () => {
 									<FormLabel className='text-xs font-bold uppercase text-zinc-500 dark:text-zinc-200'>Пароль</FormLabel>
 									<FormControl>
 										<Input
-											{...field}
 											placeholder='******'
 											type='password'
 											disabled={isPending}
 											className='border-0 bg-zinc-300/25 text-black focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white dark:placeholder:text-white/55'
+											{...field}
 										/>
 									</FormControl>
 									<FormMessage className='text-xs dark:text-rose-500' />

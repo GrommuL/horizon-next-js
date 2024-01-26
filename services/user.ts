@@ -1,3 +1,4 @@
+import { auth } from '@/auth'
 import { database } from '@/lib/database'
 
 export const getUserByEmail = async (email: string) => {
@@ -18,4 +19,9 @@ export const getUserById = async (id: string) => {
 	} catch {
 		return null
 	}
+}
+
+export const currentUser = async () => {
+	const session = await auth()
+	return session?.user
 }

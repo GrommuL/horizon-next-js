@@ -1,22 +1,17 @@
-import { auth, signOut } from '@/auth'
-import { Button } from '@/components/ui/button'
+import { redirect } from 'next/navigation'
+import { database } from '@/lib/database'
+import { initialProfile } from '@/lib/initial-profile'
+import { CreateServerModal } from '@/components/modals/create-server-modal'
 
-const HomePage = async () => {
-	const session = await auth()
+const SetupPage = async () => {
+	const profile = await initialProfile()
 
-	return (
-		<div className='flex h-full items-center justify-center'>
-			{JSON.stringify(session)}
-			<form
-				action={async () => {
-					'use server'
+	const server = await database.server.findFirst({ where: { members: { some: { profileId: profile.id } } } })
 
-					await signOut()
-				}}
-			>
-				<Button type='submit'>Logout</Button>
-			</form>
-		</div>
-	)
+	if (!!server) {
+		return redirect(`/servers/${server.id}`)
+	}
+
+	return <CreateServerModal />
 }
-export default HomePage
+export default SetupPage

@@ -1,15 +1,18 @@
 import { auth } from '@/auth'
 import { DEFAULT_AUTH_REDIRECT } from '@/lib/constants'
-import { apiAuthPrefix, authRoutes } from '@/routes'
+import { apiAuthPrefix, apiPrefix, authRoutes } from '@/routes'
 
 export default auth((request) => {
 	const { nextUrl } = request
 
 	const isLoggedIn = !!request.auth
 	const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+	const isApiRoute = nextUrl.pathname.startsWith(apiPrefix)
 	const isAuthRoutes = authRoutes.includes(nextUrl.pathname)
 
 	if (isApiAuthRoute) return null
+
+	if (isApiRoute) return null
 
 	if (isAuthRoutes) {
 		if (isLoggedIn) {

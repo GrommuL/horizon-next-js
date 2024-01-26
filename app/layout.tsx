@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { cn } from '@/lib/utils'
+import { auth } from '@/auth'
 import './globals.css'
+import { SessionProvider } from 'next-auth/react'
 
 const font = Open_Sans({ subsets: ['latin'] })
 
@@ -11,15 +13,18 @@ export const metadata: Metadata = {
 	description: 'Horizon - Your place to talk and hang out'
 }
 
-const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
+const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>) => {
+	const session = await auth()
 	return (
-		<html lang='en' suppressHydrationWarning>
-			<body className={cn(font.className, 'bg-white dark:bg-[#313338]')}>
-				<ThemeProvider attribute='class' defaultTheme='dark' enableSystem storageKey='horizon-theme'>
-					{children}
-				</ThemeProvider>
-			</body>
-		</html>
+		<SessionProvider session={session}>
+			<html lang='en' suppressHydrationWarning>
+				<body className={cn(font.className, 'bg-white dark:bg-[#313338]')}>
+					<ThemeProvider attribute='class' defaultTheme='dark' enableSystem storageKey='horizon-theme'>
+						{children}
+					</ThemeProvider>
+				</body>
+			</html>
+		</SessionProvider>
 	)
 }
 

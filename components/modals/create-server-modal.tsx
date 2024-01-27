@@ -12,7 +12,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { FileUpload } from '@/components/file-upload'
-import { ThemeSwitcher } from '../theme-switcher'
 import { useRouter } from 'next/navigation'
 
 export const CreateServerModal = () => {

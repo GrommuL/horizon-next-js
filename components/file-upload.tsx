@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { UploadDropzone } from '@/lib/uploadthing'
 import { X } from 'lucide-react'
+import { UploadDropzone } from '@/lib/uploadthing'
 
 type FileUploadProps = {
 	onChange: (url?: string) => void

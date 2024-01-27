@@ -1,6 +1,6 @@
-import { currentUser } from '@/services/user'
 import { redirect } from 'next/navigation'
-import { database } from './database'
+import { currentUser } from '@/services/user'
+import { database } from '@/lib/database'
 
 export const initialProfile = async () => {
 	const user = await currentUser()

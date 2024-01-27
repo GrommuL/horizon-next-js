@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Open_Sans } from 'next/font/google'
+import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
 import './globals.css'
-import { SessionProvider } from 'next-auth/react'
 
 const font = Open_Sans({ subsets: ['latin'] })
 

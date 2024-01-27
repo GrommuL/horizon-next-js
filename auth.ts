@@ -2,7 +2,6 @@ import NextAuth from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { database } from '@/lib/database'
 import authConfig from '@/auth.config'
-import { getUserById } from './services/user'
 
 export const {
 	handlers: { GET, POST },
@@ -18,6 +17,11 @@ export const {
 			}
 
 			return session
+		},
+		async jwt({ token }) {
+			if (!token.sub) return token
+
+			return token
 		}
 	},
 	adapter: PrismaAdapter(database),

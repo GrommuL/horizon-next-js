@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import { DEFAULT_AUTH_REDIRECT } from '@/lib/constants'
+import { DEFAULT_AUTH_REDIRECT, REDIRECT_TO_LOGIN } from '@/lib/constants'
 import { apiAuthPrefix, apiPrefix, authRoutes } from '@/routes'
 
 export default auth((request) => {
@@ -22,7 +22,7 @@ export default auth((request) => {
 	}
 
 	if (!isLoggedIn && !isApiAuthRoute) {
-		return Response.redirect(new URL('/login', nextUrl))
+		return Response.redirect(new URL(REDIRECT_TO_LOGIN, nextUrl))
 	}
 
 	return null

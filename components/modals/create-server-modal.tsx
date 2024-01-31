@@ -2,7 +2,6 @@
 
 import * as z from 'zod'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CircleDashedIcon } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,14 +12,13 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { FileUpload } from '@/components/file-upload'
 import { useRouter } from 'next/navigation'
+import { useModal } from '@/hooks/use-modal-store'
 
 export const CreateServerModal = () => {
-	const [isMounted, setIsMounted] = useState(false)
+	const { isOpen, onClose, type } = useModal()
 	const router = useRouter()
 
-	useEffect(() => {
-		setIsMounted(true)
-	}, [])
+	const isModalOpen = isOpen && type === 'createServer'
 
 	const form = useForm({
 		resolver: zodResolver(ServerSchema),
@@ -38,18 +36,19 @@ export const CreateServerModal = () => {
 
 			form.reset()
 			router.refresh()
-			window.location.reload()
+			onClose()
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
-	if (!isMounted) {
-		return null
+	const handleClose = () => {
+		form.reset()
+		onClose()
 	}
 
 	return (
-		<Dialog open>
+		<Dialog open={isModalOpen} onOpenChange={handleClose}>
 			<DialogContent className='overflow-hidden p-0 dark:bg-zinc-300/5'>
 				<DialogHeader className='px-6 pt-8'>
 					<DialogTitle className='text-center text-2xl font-bold text-zinc-700 dark:text-zinc-300'>Создай свой сервер</DialogTitle>

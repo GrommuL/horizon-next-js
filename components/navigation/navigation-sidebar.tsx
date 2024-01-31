@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation'
-import { DEFAULT_AUTH_REDIRECT } from '@/lib/constants'
 import { currentProfile } from '@/services/profile'
 import { database } from '@/lib/database'
 import { NavigationAction } from '@/components/navigation/navigation-action'
@@ -8,11 +7,12 @@ import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { ThemeSwitcher } from '@/components/theme-switcher'
 import { UserButton } from '@/components/user-button'
+import { REDIRECT_TO_LOGIN } from '@/lib/constants'
 
 export const NavigationSidebar = async () => {
 	const profile = await currentProfile()
 
-	if (!profile) return redirect(DEFAULT_AUTH_REDIRECT)
+	if (!profile) return redirect(REDIRECT_TO_LOGIN)
 
 	const servers = await database.server.findMany({ where: { members: { some: { profileId: profile.id } } } })
 

@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
 import './globals.css'
+import { ModalProvider } from '@/components/providers/modal-provider'
 
 const font = Open_Sans({ subsets: ['latin'] })
 
@@ -20,6 +21,7 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
 			<html lang='en' suppressHydrationWarning>
 				<body className={cn(font.className, 'bg-white dark:bg-[#313338]')}>
 					<ThemeProvider attribute='class' defaultTheme='dark' enableSystem storageKey='horizon-theme'>
+						<ModalProvider />
 						{children}
 					</ThemeProvider>
 				</body>

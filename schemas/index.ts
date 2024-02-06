@@ -1,3 +1,4 @@
+import { ChannelType } from '@prisma/client'
 import * as z from 'zod'
 
 export const LoginSchema = z.object({
@@ -45,4 +46,14 @@ export const ServerSchema = z.object({
 	imageUrl: z.string().min(1, {
 		message: 'Изображение сервера обязательно для заполнения'
 	})
+})
+
+export const ChannelSchema = z.object({
+	name: z
+		.string()
+		.min(1, {
+			message: 'Название канала обязательно для заполнения'
+		})
+		.refine((name) => name !== 'general', { message: "Название канала не может быть 'general'" }),
+	type: z.nativeEnum(ChannelType)
 })

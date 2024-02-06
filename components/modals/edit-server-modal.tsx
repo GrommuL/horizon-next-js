@@ -53,7 +53,6 @@ export const EditServerModal = () => {
 	}
 
 	const handleClose = () => {
-		form.reset()
 		onClose()
 	}
 
@@ -61,10 +60,7 @@ export const EditServerModal = () => {
 		<Dialog open={isModalOpen} onOpenChange={handleClose}>
 			<DialogContent className='overflow-hidden p-0 dark:bg-zinc-300/5'>
 				<DialogHeader className='px-6 pt-8'>
-					<DialogTitle className='text-center text-2xl font-bold text-zinc-700 dark:text-zinc-300'>Создай свой сервер</DialogTitle>
-					<DialogDescription className='text-center text-zinc-500 dark:text-zinc-500'>
-						Придайте своему серверу индивидуальность. Вы всегда можете изменить его позже.
-					</DialogDescription>
+					<DialogTitle className='text-center text-2xl font-bold text-zinc-700 dark:text-zinc-300'>Изменение информации о сервере</DialogTitle>
 				</DialogHeader>
 				<Form {...form}>
 					<form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>

@@ -24,6 +24,3 @@ export const ModalProvider = () => {
 		</>
 	)
 }
-/*
-		4:07:49
-*/

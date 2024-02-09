@@ -87,10 +87,10 @@ export const MembersModal = () => {
 			<DialogContent className='overflow-hidden dark:bg-zinc-300/5'>
 				<DialogHeader className='px-5 pt-8'>
 					<DialogTitle className='text-center text-2xl font-bold text-zinc-700 dark:text-zinc-300'>Управление участниками сервера</DialogTitle>
-					<DialogDescription className='text-center'>{server?.members.length} members</DialogDescription>
+					<DialogDescription className='text-center'>{server?.members?.length} members</DialogDescription>
 				</DialogHeader>
 				<ScrollArea className='mt-8 max-h-[420px] pr-6'>
-					{server?.members.map((member) => (
+					{server?.members?.map((member) => (
 						<div key={member.id} className='mb-6 flex items-center gap-x-2'>
 							<UserAvatar src={member.profile.imageUrl} />
 							<div className='flex flex-col gap-y-1'>

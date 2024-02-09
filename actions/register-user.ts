@@ -22,12 +22,12 @@ export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
 
 	if (existingUser) return { error: 'Пользователь с такой почтой уже существует' }
 
-	await database.user.create({
-		data: {
-			email,
-			password: hashedPassword
-		}
-	})
+	// await database.profile.create({
+	// 	data: {
+	// 		email,
+	// 		password: hashedPassword
+	// 	}
+	// })
 
 	try {
 		await signIn('credentials', {

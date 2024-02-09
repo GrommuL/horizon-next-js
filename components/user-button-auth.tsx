@@ -12,7 +12,7 @@ type UserButtonProps = {
 	profileName: string
 }
 
-export const UserButton = ({ profileUrl, profileName }: UserButtonProps) => {
+export const UserButtonAuth = ({ profileUrl, profileName }: UserButtonProps) => {
 	const router = useRouter()
 
 	const signOut = () => {

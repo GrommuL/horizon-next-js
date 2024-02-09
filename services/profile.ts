@@ -1,14 +1,37 @@
-import { currentUser } from '@/services/user'
+import { auth } from '@clerk/nextjs'
 import { database } from '@/lib/database'
 
-export const currentProfile = async () => {
-	const user = await currentUser()
+import { NextApiRequest } from 'next'
+import { getAuth } from '@clerk/nextjs/server'
 
-	if (!user?.id) {
+export const currentProfile = async () => {
+	const { userId } = auth()
+
+	if (!userId) {
 		return null
 	}
 
-	const profile = database.profile.findUnique({ where: { userId: user.id } })
+	const profile = await database.profile.findUnique({
+		where: {
+			userId
+		}
+	})
+
+	return profile
+}
+
+export const currentProfilePages = async (req: NextApiRequest) => {
+	const { userId } = getAuth(req)
+
+	if (!userId) {
+		return null
+	}
+
+	const profile = await database.profile.findUnique({
+		where: {
+			userId
+		}
+	})
 
 	return profile
 }

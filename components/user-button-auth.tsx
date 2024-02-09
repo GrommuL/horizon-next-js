@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { UserRoundIcon } from 'lucide-react'
-import { logout } from '@/actions/logout'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ActionTooltip } from '@/components/action-tooltip'
@@ -16,7 +15,6 @@ export const UserButtonAuth = ({ profileUrl, profileName }: UserButtonProps) => 
 	const router = useRouter()
 
 	const signOut = () => {
-		logout()
 		router.refresh()
 	}
 

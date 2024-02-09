@@ -57,3 +57,13 @@ export const ChannelSchema = z.object({
 		.refine((name) => name !== 'general', { message: "Название канала не может быть 'general'" }),
 	type: z.nativeEnum(ChannelType)
 })
+
+export const ChatSchema = z.object({
+	content: z.string().min(1)
+})
+
+export const MessageFileSchema = z.object({
+	fileUrl: z.string().min(1, {
+		message: 'Прикрепите файл или картинку.'
+	})
+})

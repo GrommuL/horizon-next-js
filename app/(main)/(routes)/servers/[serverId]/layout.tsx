@@ -1,13 +1,14 @@
 import { redirect } from 'next/navigation'
-import { DEFAULT_AUTH_REDIRECT, REDIRECT_TO_LOGIN } from '@/lib/constants'
+import { DEFAULT_AUTH_REDIRECT } from '@/lib/constants'
 import { currentProfile } from '@/services/profile'
 import { database } from '@/lib/database'
 import { ServerSidebar } from '@/components/server/server-sidebar'
+import { redirectToSignIn } from '@clerk/nextjs'
 
 const ServerIdLayout = async ({ children, params }: { children: React.ReactNode; params: { serverId: string } }) => {
 	const profile = await currentProfile()
 
-	if (!profile) return redirect(REDIRECT_TO_LOGIN)
+	if (!profile) return redirectToSignIn()
 
 	const server = await database.server.findUnique({ where: { id: params.serverId, members: { some: { profileId: profile.id } } } })
 
